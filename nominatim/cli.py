@@ -24,6 +24,9 @@ from nominatim.clicmd.args import NominatimArgs, Subcommand
 
 LOG = logging.getLogger()
 
+# Patched in by nominatim AUR package
+DEFAULT_PROJECT_DIR = '/var/lib/nominatim/'
+
 class CommandlineParser:
     """ Wraps some of the common functions for parsing the command line
         and setting up subcommands.
@@ -51,8 +54,8 @@ class CommandlineParser:
                            help='Print only error messages')
         group.add_argument('-v', '--verbose', action='count', default=1,
                            help='Increase verboseness of output')
-        group.add_argument('--project-dir', metavar='DIR', default='.',
-                           help='Base directory of the Nominatim installation (default:.)')
+        group.add_argument('--project-dir', metavar='DIR', default=DEFAULT_PROJECT_DIR,
+                           help=f'Base directory of the Nominatim installation (default: {DEFAULT_PROJECT_DIR})')
         group.add_argument('-j', '--threads', metavar='NUM', type=int,
                            help='Number of parallel threads to use')
 
